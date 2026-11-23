@@ -87,3 +87,21 @@ function changePin(){let p=$('newpin').value;if(!/^\d{4,8}$/.test(p))return aler
 function exportCSV(){let range=window.cscReportRange||{from:$('reportDate').value||today(),to:$('reportDate').value||today()};let rows=[['Date','Type','Amount','Charge','Mode','Status','Note'],...data.tx.filter(t=>t.date.slice(0,10)>=range.from&&t.date.slice(0,10)<=range.to).map(t=>[t.date,t.type,t.amount,t.charge,t.mode,t.status,t.note])];let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='CSC_Report_'+range.from+'_to_'+range.to+'.csv';a.click();URL.revokeObjectURL(a.href)}
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script></body></html>
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+  header { padding: 14px; }
+  header h1 { font-size: 21px; }
+  main { padding: 10px; }
+  .row { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  nav { gap: 8px; }
+  nav button, button {
+    font-size: 15px;
+    padding: 13px 15px;
+  }
+  label { font-size: 15px; }
+  input, select, textarea {
+    font-size: 17px;
+    padding: 14px;
+  }
+}
