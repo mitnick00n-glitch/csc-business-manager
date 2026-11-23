@@ -1,164 +1,199 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101a2e">
-<title>CSC Business Manager</title>
+<title>CSC Manage</title>
 <style>
-:root{--bg:#f3f6fb;--panel:#fff;--ink:#17243b;--muted:#718096;--line:#e5ebf3;--nav:#101a2e;--blue:#285ee8;--blue2:#eaf0ff;--green:#13865c;--red:#c74747;--shadow:0 8px 26px rgba(25,45,80,.07)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
-.app{min-height:100vh}.topbar{background:var(--nav);color:#fff;padding:18px max(16px,calc((100vw - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#4f82ff,#2450d7);display:grid;place-items:center;font-weight:900;font-size:17px;box-shadow:0 5px 14px #0003}.brand h1{font-size:18px;margin:0;letter-spacing:.2px}.brand small{display:block;color:#b9c7df;font-size:12px}.top-actions{display:flex;gap:8px}.top-actions button{background:#263653;color:#fff;border:1px solid #40506b;border-radius:10px;padding:9px 12px;font-size:13px}
-.shell{max-width:1180px;margin:auto;padding:18px 16px 40px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px}.sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px;height:max-content;position:sticky;top:12px;box-shadow:var(--shadow)}.nav-label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1px;padding:12px 10px 7px;text-transform:uppercase}.nav-btn{width:100%;display:flex;align-items:center;gap:11px;border:0;background:transparent;color:#40506a;padding:12px 11px;border-radius:11px;text-align:left;font-weight:650;margin:2px 0}.nav-btn .ico{width:25px;text-align:center;font-size:18px}.nav-btn.active{background:var(--blue2);color:var(--blue)}.nav-btn:hover{background:#f1f5fb}.content{min-width:0}.page{display:none}.page.active{display:block}.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:3px 0 18px}.page-head h2{font-size:25px;margin:0 0 4px}.page-head p{margin:0;color:var(--muted);font-size:14px}.pill{background:#eaf7f1;color:var(--green);padding:7px 11px;border-radius:30px;font-size:12px;font-weight:750;white-space:nowrap}
-.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);min-width:0}.stat .slabel{color:var(--muted);font-size:13px;font-weight:650}.stat .value{font-size:clamp(20px,2.5vw,27px);font-weight:850;margin-top:7px;overflow-wrap:anywhere}.stat .hint{font-size:12px;color:var(--muted);margin-top:4px}.positive{color:var(--green)}.negative{color:var(--red)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow);margin-bottom:15px}.panel h3{margin:0 0 14px;font-size:17px}.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.quick{border:1px solid var(--line);background:#fff;border-radius:14px;padding:16px 10px;text-align:left;color:var(--ink);font-weight:750;min-height:95px}.quick span{display:block;font-size:24px;margin-bottom:7px}.quick small{display:block;color:var(--muted);font-weight:500;font-size:12px}.quick:hover{border-color:#9bb4ff;background:#f8faff}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{min-width:0}.field.full{grid-column:1/-1}label{display:block;font-size:13px;font-weight:750;color:#42516a;margin:0 0 7px}input,select,textarea{width:100%;border:1px solid #d9e1ec;border-radius:11px;padding:13px 14px;background:#fff;color:var(--ink);outline:none;min-height:48px}input:focus,select:focus,textarea:focus{border-color:#6c91f6;box-shadow:0 0 0 3px #285ee81a}textarea{min-height:85px;resize:vertical}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}.btn{border:0;border-radius:11px;padding:13px 17px;font-weight:750;min-height:46px}.primary{background:var(--blue);color:#fff}.secondary{background:#edf2fa;color:#31425e}.danger{background:#fff0f0;color:var(--red)}.btn:active{transform:translateY(1px)}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px}table{border-collapse:collapse;width:100%;min-width:560px;background:#fff}th,td{text-align:left;padding:12px 13px;border-bottom:1px solid var(--line);font-size:13px}th{background:#f7f9fc;color:#66758d;font-size:11px;text-transform:uppercase;letter-spacing:.5px}tr:last-child td{border-bottom:0}.tag{display:inline-block;padding:4px 8px;border-radius:30px;background:#edf2fa;color:#40516b;font-size:11px;font-weight:750}.tag.in{background:#e8f7f0;color:var(--green)}.tag.out{background:#fff0f0;color:var(--red)}.empty{text-align:center;color:var(--muted);padding:24px}.notice{padding:12px 14px;border-radius:12px;background:#fff8e7;color:#805d12;font-size:13px;margin-bottom:14px}.muted{color:var(--muted)}.split{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}.filters select,.filters input{width:auto;min-width:145px}.hidden{display:none!important}.footer-note{text-align:center;color:#8a96a8;font-size:11px;padding:14px}
-.login{position:fixed;inset:0;background:#101a2e;z-index:10;display:grid;place-items:center;padding:20px}.login-card{background:#fff;border-radius:20px;padding:26px;width:min(390px,100%);text-align:center}.login-card .logo{margin:0 auto 12px}.login-card h2{margin:0 0 5px}.login-card p{color:var(--muted);font-size:13px}.login-card input{text-align:center;font-size:22px;letter-spacing:8px;margin:10px 0}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#17243b;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:20;display:none;max-width:90%;font-size:14px}
-@media(max-width:850px){.shell{grid-template-columns:1fr;padding:12px}.sidebar{position:static;display:flex;overflow:auto;gap:5px;padding:8px;border-radius:13px}.nav-label{display:none}.nav-btn{width:auto;min-width:max-content;justify-content:center;padding:10px 12px;font-size:13px}.nav-btn .ico{width:auto}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.topbar{padding:13px 15px}}
-@media(max-width:560px){body{font-size:16px}.topbar{padding:12px}.brand h1{font-size:16px}.brand small{font-size:11px}.logo{width:38px;height:38px}.top-actions button{padding:8px;font-size:12px}.shell{padding:10px 10px 28px;gap:10px}.sidebar{margin:0 -1px}.nav-btn{padding:10px 11px}.page-head{margin:5px 2px 14px}.page-head h2{font-size:22px}.page-head p{font-size:13px}.cards{gap:9px}.stat{padding:13px;border-radius:13px}.stat .value{font-size:21px}.panel{padding:14px;border-radius:14px}.form-grid{grid-template-columns:1fr;gap:12px}.field.full{grid-column:auto}input,select,textarea{font-size:16px;min-height:50px;padding:13px}.btn{width:100%;min-height:49px;font-size:15px}.actions{display:grid;grid-template-columns:1fr}.quick{min-height:90px;padding:13px 11px}.filters select,.filters input{width:100%;min-width:0}.filters{display:grid;grid-template-columns:1fr 1fr}.page-head .pill{font-size:10px}}
-@media print{.topbar,.sidebar,.no-print,.actions,.filters,.footer-note{display:none!important}.shell{display:block;padding:0}.page{display:none!important}.page.active{display:block!important}.panel,.stat{box-shadow:none;border:1px solid #ddd}.table-wrap{overflow:visible}table{min-width:0}body{background:#fff}}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="topbar">
- <div class="brand"><div class="logo">CSC</div><div><h1>CSC Business Manager</h1><small>Offline business record system</small></div></div>
- <div class="top-actions"><button onclick="showPage('backup')">Backup</button><button onclick="showPage('settings')">Settings</button></div>
-</header>
-<div class="shell">
- <aside class="sidebar" aria-label="Main navigation">
-  <div class="nav-label">Workspace</div>
-  <button class="nav-btn active" data-page="dashboard" onclick="showPage('dashboard')"><span class="ico">▦</span>Dashboard</button>
-  <button class="nav-btn" data-page="cashin" onclick="showPage('cashin')"><span class="ico">＋</span>Cash In</button>
-  <button class="nav-btn" data-page="withdraw" onclick="showPage('withdraw')"><span class="ico">↗</span>Withdraw</button>
-  <button class="nav-btn" data-page="transfer" onclick="showPage('transfer')"><span class="ico">⇄</span>Transfer</button>
-  <button class="nav-btn" data-page="entry" onclick="showPage('entry')"><span class="ico">＋</span>New Entry</button>
-  <button class="nav-btn" data-page="history" onclick="showPage('history')"><span class="ico">▤</span>History</button>
-  <div class="nav-label">Management</div>
-  <button class="nav-btn" data-page="reports" onclick="showPage('reports')"><span class="ico">▥</span>Reports</button>
-  <button class="nav-btn" data-page="backup" onclick="showPage('backup')"><span class="ico">⇩</span>Backup & Restore</button>
-  <button class="nav-btn" data-page="settings" onclick="showPage('settings')"><span class="ico">⚙</span>Settings</button>
- </aside>
- <main class="content">
-  <section class="page active" id="page-dashboard">
-   <div class="page-head"><div><h2>Dashboard</h2><p>Your business overview at a glance.</p></div><span class="pill">● Offline ready</span></div>
-   <div class="cards">
-    <div class="stat"><div class="slabel">Cash Balance</div><div class="value" id="cashBalance">₹0.00</div><div class="hint">Available cash</div></div>
-    <div class="stat"><div class="slabel">Bank Balance</div><div class="value" id="bankBalance">₹0.00</div><div class="hint">Recorded bank balance</div></div>
-    <div class="stat"><div class="slabel">Today's Cash In</div><div class="value positive" id="todayIn">₹0.00</div><div class="hint">Money received</div></div>
-    <div class="stat"><div class="slabel">Today's Withdraw</div><div class="value negative" id="todayOut">₹0.00</div><div class="hint">Money paid out</div></div>
-   </div>
-   <div class="panel"><h3>Quick Actions</h3><div class="quick-grid">
-    <button class="quick" onclick="showPage('cashin')"><span>＋</span>Cash In<small>Record received money</small></button>
-    <button class="quick" onclick="showPage('withdraw')"><span>↗</span>Withdraw<small>Record cash paid out</small></button>
-    <button class="quick" onclick="showPage('transfer')"><span>⇄</span>Transfer<small>Move between accounts</small></button>
-    <button class="quick" onclick="showPage('entry')"><span>▤</span>New Entry<small>Other transaction</small></button>
-   </div></div>
-   <div class="panel"><div class="split"><h3>Recent Transactions</h3><button class="btn secondary no-print" onclick="showPage('history')">View All</button></div><div id="recentTable"></div></div>
-  </section>
-  <section class="page" id="page-cashin">
-   <div class="page-head"><div><h2>Cash In</h2><p>Record money received into cash or bank.</p></div><span class="pill">Income / Receipt</span></div>
-   <div class="panel"><h3>New Cash In Entry</h3><form id="cashinForm" class="form-grid">
-    <div class="field"><label>Date</label><input type="date" name="date" required></div><div class="field"><label>Received Into</label><select name="account"><option value="cash">Cash</option><option value="bank">Bank</option></select></div>
-    <div class="field"><label>Amount (₹)</label><input type="number" name="amount" min="0.01" step="0.01" placeholder="Enter amount" required></div><div class="field"><label>Category</label><select name="category"><option>Service Income</option><option>Cash Deposit</option><option>Other Receipt</option></select></div>
-    <div class="field full"><label>Note (optional)</label><input name="note" maxlength="120" placeholder="Short description"></div>
-    <div class="field full actions"><button class="btn primary" type="submit">Save Cash In</button></div>
-   </form></div>
-  </section>
-  <section class="page" id="page-withdraw">
-   <div class="page-head"><div><h2>Withdraw</h2><p>Record money paid out from cash or bank.</p></div><span class="pill">Payment / Expense</span></div>
-   <div class="panel"><h3>New Withdraw Entry</h3><form id="withdrawForm" class="form-grid">
-    <div class="field"><label>Date</label><input type="date" name="date" required></div><div class="field"><label>Withdraw From</label><select name="account"><option value="cash">Cash</option><option value="bank">Bank</option></select></div>
-    <div class="field"><label>Amount (₹)</label><input type="number" name="amount" min="0.01" step="0.01" placeholder="Enter amount" required></div><div class="field"><label>Category</label><select name="category"><option>Office Expense</option><option>Personal Withdrawal</option><option>Bill Payment</option><option>Other Payment</option></select></div>
-    <div class="field full"><label>Note (optional)</label><input name="note" maxlength="120" placeholder="Short description"></div>
-    <div class="field full actions"><button class="btn primary" type="submit">Save Withdraw</button></div>
-   </form></div>
-  </section>
-  <section class="page" id="page-transfer">
-   <div class="page-head"><div><h2>Transfer</h2><p>Move balance between Cash and Bank accounts.</p></div><span class="pill">Internal Transfer</span></div>
-   <div class="notice">A transfer changes the two account balances but is not counted as income or expense.</div>
-   <div class="panel"><h3>New Transfer</h3><form id="transferForm" class="form-grid">
-    <div class="field"><label>Date</label><input type="date" name="date" required></div><div class="field"><label>Amount (₹)</label><input type="number" name="amount" min="0.01" step="0.01" placeholder="Enter amount" required></div>
-    <div class="field"><label>Transfer From</label><select name="from"><option value="cash">Cash</option><option value="bank">Bank</option></select></div><div class="field"><label>Transfer To</label><select name="to"><option value="bank">Bank</option><option value="cash">Cash</option></select></div>
-    <div class="field full"><label>Note (optional)</label><input name="note" maxlength="120" placeholder="Transfer reference"></div>
-    <div class="field full actions"><button class="btn primary" type="submit">Save Transfer</button></div>
-   </form></div>
-  </section>
-  <section class="page" id="page-entry">
-   <div class="page-head"><div><h2>New Entry</h2><p>Record service charges or other business adjustments.</p></div></div>
-   <div class="panel"><h3>Transaction Details</h3><form id="entryForm" class="form-grid">
-    <div class="field"><label>Date</label><input type="date" name="date" required></div><div class="field"><label>Entry Type</label><select name="type"><option value="in">Income</option><option value="out">Expense</option></select></div>
-    <div class="field"><label>Account</label><select name="account"><option value="cash">Cash</option><option value="bank">Bank</option></select></div><div class="field"><label>Amount (₹)</label><input type="number" name="amount" min="0.01" step="0.01" required placeholder="Enter amount"></div>
-    <div class="field"><label>Category</label><input name="category" maxlength="50" placeholder="e.g. Service Charge" required></div><div class="field"><label>Reference (optional)</label><input name="note" maxlength="120" placeholder="Short note / reference"></div>
-    <div class="field full actions"><button class="btn primary" type="submit">Save Entry</button></div>
-   </form></div>
-  </section>
-  <section class="page" id="page-history">
-   <div class="page-head"><div><h2>Transaction History</h2><p>Search and review saved entries.</p></div></div>
-   <div class="panel"><div class="filters"><input id="historySearch" placeholder="Search category or note"><select id="historyType"><option value="all">All Types</option><option value="in">Cash In / Income</option><option value="out">Withdraw / Expense</option><option value="transfer">Transfer</option></select><input type="date" id="historyDate"></div><div id="historyTable"></div></div>
-  </section>
-  <section class="page" id="page-reports">
-   <div class="page-head"><div><h2>Reports</h2><p>View totals for a selected reporting period.</p></div><span class="pill">Print / Save PDF</span></div>
-   <div class="panel"><div class="filters"><select id="reportPeriod"><option value="day">Daily Report</option><option value="week">Weekly Report</option><option value="month" selected>Monthly Report</option></select><input type="date" id="reportDate"></div>
-    <div class="cards">
-     <div class="stat"><div class="slabel">Total Cash In</div><div class="value positive" id="rIn">₹0.00</div></div>
-     <div class="stat"><div class="slabel">Total Withdraw / Expense</div><div class="value negative" id="rOut">₹0.00</div></div>
-     <div class="stat"><div class="slabel">Net Movement</div><div class="value" id="rNet">₹0.00</div></div>
-     <div class="stat"><div class="slabel">Transactions</div><div class="value" id="rCount">0</div></div>
-    </div><div class="split"><h3>Report Details</h3><div class="actions no-print" style="margin:0"><button class="btn secondary" onclick="exportCSV(true)">Export CSV</button><button class="btn primary" onclick="window.print()">Print / Save PDF</button></div></div><div id="reportTable"></div>
-   </div>
-  </section>
-  <section class="page" id="page-backup">
-   <div class="page-head"><div><h2>Backup & Restore</h2><p>Keep a copy of your records in a safe place.</p></div></div>
-   <div class="panel"><h3>Data Backup</h3><p class="muted">Download all transaction records as a JSON file. Save it somewhere private and safe.</p><button class="btn primary" onclick="backupData()">Download JSON Backup</button></div>
-   <div class="panel"><h3>Restore Backup</h3><p class="muted">Choose a backup JSON file. Restoring replaces the records currently stored in this browser.</p><input type="file" id="restoreFile" accept=".json,application/json"><div class="actions"><button class="btn secondary" onclick="restoreData()">Restore Selected Backup</button></div></div>
-   <div class="panel"><h3>Export Records</h3><p class="muted">Download transaction history as a spreadsheet-compatible CSV file.</p><button class="btn secondary" onclick="exportCSV(false)">Download CSV</button></div>
-  </section>
-  <section class="page" id="page-settings">
-   <div class="page-head"><div><h2>Settings</h2><p>Manage app preferences and local access PIN.</p></div></div>
-   <div class="panel"><h3>Change App PIN</h3><form id="pinForm" class="form-grid"><div class="field"><label>Current PIN</label><input type="password" name="old" inputmode="numeric" maxlength="8" required></div><div class="field"><label>New PIN (4–8 digits)</label><input type="password" name="next" inputmode="numeric" minlength="4" maxlength="8" pattern="[0-9]{4,8}" required></div><div class="field full actions"><button class="btn primary">Update PIN</button></div></form><p class="muted" style="font-size:12px">The PIN is a basic local screen lock, not encryption. Do not store sensitive banking credentials here.</p></div>
-   <div class="panel"><h3>App Information</h3><p><b>CSC Business Manager</b><br><span class="muted">Independent offline record-keeping tool. Not an official government CSC application.</span></p><button class="btn danger" onclick="clearRecords()">Clear All Transaction Records</button></div>
-  </section>
-  <div class="footer-note">CSC Business Manager • Records are stored locally in this browser on this device.</div>
- </main>
-</div>
-</div>
-<div class="login" id="login"><div class="login-card"><div class="logo">CSC</div><h2>Welcome Back</h2><p>Enter your app PIN to continue</p><form id="loginForm"><input type="password" id="loginPin" inputmode="numeric" maxlength="8" placeholder="••••" required><button class="btn primary" style="width:100%">Unlock App</button></form><p id="loginError" style="color:#c74747"></p><small class="muted">First-time PIN: 1234</small></div></div>
+:root{--bg:#eef2fb;--card:#fff;--ink:#15213b;--mut:#6b7794;--line:#e3e9f5;--nav:#0f1b3d;--blue:#2563eb;--grn:#16a34a;--red:#dc2626;--sh:0 6px 20px rgba(20,40,90,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1226;--card:#141f3a;--ink:#e8eefc;--mut:#93a0c0;--line:#243152;--nav:#070d1d;--sh:none}}
+:root[data-theme="dark"]{--bg:#0b1226;--card:#141f3a;--ink:#e8eefc;--mut:#93a0c0;--line:#243152;--nav:#070d1d;--sh:none}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);z-index:30}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--nav);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px}
+header h1{font-size:18px;flex:1}header button{background:#ffffff1f;color:#fff;border-radius:10px;width:40px;height:40px;font-size:19px}
+#drawer{position:fixed;top:0;bottom:0;left:0;width:280px;max-width:82%;background:var(--nav);color:#fff;z-index:40;transform:translateX(-100%);transition:transform .25s;padding:calc(env(safe-area-inset-top,0px) + 16px) 12px 20px;overflow:auto}
+#drawer.open{transform:none}
+#ov{position:fixed;inset:0;background:#0008;z-index:35;display:none}#ov.on{display:block}
+.brand{text-align:center;padding:6px 0 14px}.brand b{display:block;font-size:21px;margin-top:6px}.brand small{color:#b6c3e0}
+.logo{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#ff9933,#fff 50%,#138808);color:#1a2a6c;font-weight:900;font-size:18px}
+.nb{display:flex;align-items:center;gap:12px;width:100%;background:none;color:#dbe4f7;padding:13px 12px;border-radius:12px;font-weight:600;text-align:left}
+.nb span{width:26px;text-align:center;font-size:19px}.nb.on{background:var(--blue);color:#fff}
+main{padding:14px 14px 40px;max-width:760px;margin:auto}
+.page{display:none}.page.on{display:block}
+h2{font-size:21px;margin:4px 0 12px}h3{font-size:16px;margin-bottom:10px}
+.banner{border-radius:18px;padding:18px;color:#fff;background:linear-gradient(120deg,#1d2f8f,#3b2fc9 55%,#1f6fe5);margin-bottom:12px}
+.banner b{font-size:26px;display:block}.banner b i{color:#ffd83a;font-style:normal}.banner span{font-size:13px;opacity:.9}
+.banner em{display:inline-block;background:#ffd83a;color:#1a1a1a;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;font-style:normal;margin-top:8px}
+.grid{display:grid;gap:10px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.stat{border-radius:16px;padding:14px;color:#fff;min-width:0}
+.stat small{display:block;font-size:12px;opacity:.92}.stat b{font-size:22px;display:block;overflow-wrap:anywhere}
+.s1{background:linear-gradient(135deg,#2563eb,#1d4ed8)}.s2{background:linear-gradient(135deg,#16a34a,#15803d)}.s3{background:linear-gradient(135deg,#9333ea,#7e22ce)}.s4{background:linear-gradient(135deg,#f97316,#ea580c)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px;box-shadow:var(--sh)}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center;font-size:12px;font-weight:700;color:var(--ink)}
+.tile i{display:block;font-style:normal;font-size:26px;margin-bottom:4px}
+.bal{border-radius:14px;padding:12px 6px;text-align:center;background:var(--bg);border:1px solid var(--line)}.bal b{display:block;font-size:16px}.bal small{color:var(--mut);font-size:12px}
+.qa{border-radius:14px;padding:13px 6px;color:#fff;font-weight:700;font-size:13px;text-align:center}.qa i{display:block;font-style:normal;font-size:20px}
+.row{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--bg);flex:none}
+.row div.t{flex:1;min-width:0}.row b{display:block;font-size:14px}.row small{color:var(--mut);font-size:12px}
+.pos{color:var(--grn)}.neg{color:var(--red)}.amt{font-weight:800;white-space:nowrap}
+.x{background:none;color:var(--mut);font-size:17px;padding:4px 8px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px;color:var(--mut)}
+input,select{width:100%;min-height:50px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:16px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.seg button{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 2px;font-size:12px;font-weight:700}.seg button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn{width:100%;min-height:50px;border-radius:12px;background:var(--blue);color:#fff;font-weight:800;margin-top:16px}.btn.alt{background:var(--bg);color:var(--ink);border:1px solid var(--line)}.btn.dng{background:#fee2e2;color:var(--red)}
+.hide{display:none!important}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px}.chips button{flex:none;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 14px;font-weight:700;font-size:13px}
+.svc{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;padding:13px 2px;border-bottom:1px solid var(--line);font-weight:600;text-align:left}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:#15213b;color:#fff;padding:12px 18px;border-radius:12px;z-index:50;display:none;max-width:90%}
+.empty{text-align:center;color:var(--mut);padding:18px}
+.mut{color:var(--mut);font-size:13px}
+@media(min-width:900px){#drawer{transform:none}#ov{display:none!important}header{padding-left:296px}#menu{display:none}main{margin-left:296px;max-width:none;margin-right:auto}}
+@media print{header,#drawer,.btn{display:none!important}main{margin:0}}
+</style></head><body>
+<div id="ov"></div>
+<aside id="drawer">
+ <div class="brand"><div class="logo">CSC</div><b>CSC Manage</b><small>Digital Seva, Sabke Liye</small></div>
+ <button class="nb on" data-p="dash"><span>🏠</span>Dashboard</button>
+ <button class="nb" data-p="svcs"><span>🧩</span>CSC Services</button>
+ <button class="nb" data-p="entry"><span>➕</span>New Entry</button>
+ <button class="nb" data-p="hist"><span>📒</span>Transactions</button>
+ <button class="nb" data-p="rep"><span>📊</span>Reports</button>
+ <button class="nb" data-p="bak"><span>☁️</span>Backup / Restore</button>
+ <button class="nb" data-p="set"><span>⚙️</span>Settings</button>
+ <button class="nb" data-p="about"><span>ℹ️</span>About</button>
+</aside>
+<header><button id="menu" aria-label="Menu">☰</button><h1>CSC Manage</h1><button id="theme" aria-label="Theme">🌓</button></header>
+<main>
+<section class="page on" id="p-dash">
+ <div class="banner"><b>CSC <i>Manage</i></b><span>Digital Services Made Easy</span><br><em>Empowering VLEs, Enabling Digital India</em></div>
+ <div class="grid g2">
+  <div class="stat s1"><small>Total Transactions</small><b id="d1">0</b></div>
+  <div class="stat s2"><small>Total Earnings</small><b id="d2">₹0</b></div>
+  <div class="stat s3"><small>Today’s Transactions</small><b id="d3">0</b></div>
+  <div class="stat s4"><small>Today’s Earnings</small><b id="d4">₹0</b></div>
+ </div>
+ <div class="card"><h3>Balance Summary</h3><div class="grid g3">
+  <div class="bal"><span>👛</span><b id="bw">₹0</b><small>Wallet</small></div>
+  <div class="bal"><span>🏦</span><b id="bb">₹0</b><small>Bank</small></div>
+  <div class="bal"><span>🎁</span><b id="bc">₹0</b><small>Commission</small></div></div></div>
+ <div class="card"><h3>Quick Actions</h3><div class="grid g2">
+  <button class="qa" style="background:#16a34a" data-k="add"><i>➕</i>Add Balance</button>
+  <button class="qa" style="background:#0ea5e9" data-k="wd"><i>💳</i>Withdraw</button>
+  <button class="qa" style="background:#8b5cf6" data-k="tr"><i>⇄</i>Transfer</button>
+  <button class="qa" style="background:#f59e0b" data-p="rep"><i>📄</i>Generate Report</button></div></div>
+ <div class="card"><h3>CSC Services Quick Access</h3><div class="grid g3" id="qacc"></div></div>
+ <div class="card"><h3>Last 7 Days Earnings</h3><div id="chart"></div></div>
+ <div class="card"><div style="display:flex;justify-content:space-between"><h3>Recent Transactions</h3><a data-p="hist" style="color:var(--blue);font-weight:700">View All →</a></div><div id="recent"></div></div>
+</section>
+
+<section class="page" id="p-svcs"><h2>CSC Services</h2><div class="chips" id="chips"></div><div id="svcList"></div></section>
+
+<section class="page" id="p-entry"><h2>New Entry</h2>
+ <div class="card" style="margin-top:0">
+  <div class="seg" id="seg"><button data-k="svc" class="on">Service</button><button data-k="add">Add Balance</button><button data-k="wd">Withdraw</button><button data-k="tr">Transfer</button></div>
+  <label>Date</label><input type="date" id="fd">
+  <div class="f-svc"><label>Service</label><select id="fs"></select>
+   <label>Customer Name (optional)</label><input id="fn" maxlength="60" placeholder="Name">
+   <label>Mobile (optional)</label><input id="fm" inputmode="numeric" maxlength="10" placeholder="10 digit number"></div>
+  <label id="fal">Charge / Earning (₹)</label><input type="number" id="fa" min="0.01" step="0.01" inputmode="decimal" placeholder="Amount">
+  <div class="f-acc"><label>Account</label><select id="fc"><option value="wallet">Wallet / Cash</option><option value="bank">Bank</option></select></div>
+  <div class="f-tr hide"><label>From</label><select id="ff"><option value="wallet">Wallet / Cash</option><option value="bank">Bank</option></select>
+   <label>To</label><select id="ft"><option value="bank">Bank</option><option value="wallet">Wallet / Cash</option></select></div>
+  <label>Note (optional)</label><input id="fo" maxlength="120" placeholder="Short note">
+  <button class="btn" id="save">Save Entry</button></div>
+</section>
+
+<section class="page" id="p-hist"><h2>Transactions</h2>
+ <input id="hq" placeholder="Search name, service, mobile" style="margin-bottom:10px">
+ <div class="card" style="margin-top:0"><div id="hl"></div></div></section>
+
+<section class="page" id="p-rep"><h2>Reports</h2>
+ <select id="rp"><option value="d">Today</option><option value="w">Last 7 Days</option><option value="m" selected>This Month</option></select>
+ <div class="grid g2" style="margin-top:10px"><div class="stat s2"><small>Earnings</small><b id="r1">₹0</b></div><div class="stat s1"><small>Transactions</small><b id="r2">0</b></div></div>
+ <div class="card"><h3>Service-wise Earnings</h3><div id="rl"></div></div>
+ <button class="btn" onclick="window.print()">Print / Save PDF</button></section>
+
+<section class="page" id="p-bak"><h2>Backup / Restore</h2>
+ <div class="card" style="margin-top:0"><p class="mut">Saara data sirf is browser me save hota hai. Regular backup download karte rahein.</p>
+  <button class="btn" id="bk">Download Backup (JSON)</button><button class="btn alt" id="csv">Download CSV</button>
+  <label>Restore from backup file</label><input type="file" id="rf" accept=".json,application/json"><button class="btn alt" id="rs">Restore Backup</button></div></section>
+
+<section class="page" id="p-set"><h2>Settings</h2>
+ <div class="card" style="margin-top:0"><h3>Theme</h3><div class="seg" style="grid-template-columns:repeat(3,1fr)" id="th"><button data-t="light">☀️ Light</button><button data-t="dark">🌙 Dark</button><button data-t="auto">Auto</button></div>
+  <button class="btn dng" id="clr">Clear All Records</button></div></section>
+
+<section class="page" id="p-about"><h2>About</h2><div class="card" style="margin-top:0"><b>CSC Manage v2.0</b><p class="mut" style="margin-top:6px">Offline record-keeping tool for CSC centres. Ye koi official government app nahi hai.</p></div></section>
+</main>
 <div class="toast" id="toast"></div>
 <script>
-const KEY='csc_bm_professional_v1', PINKEY='csc_bm_pin_v1';
-let records=[];
-const $=id=>document.getElementById(id);
-const today=()=>new Date().toISOString().slice(0,10);
-const money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
-function load(){try{records=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(records))records=[]}catch(e){records=[]}}
-function save(){localStorage.setItem(KEY,JSON.stringify(records));renderAll()}
-function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
-function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+p));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));if(p==='reports')renderReport();if(p==='history')renderHistory();window.scrollTo({top:0,behavior:'smooth'})}
-function initDates(){document.querySelectorAll('input[type=date]').forEach(x=>{if(!x.value)x.value=today()})}
-function balances(){let c=0,b=0;records.forEach(r=>{let a=Number(r.amount);if(r.type==='in'){if(r.account==='cash')c+=a;else b+=a}else if(r.type==='out'){if(r.account==='cash')c-=a;else b-=a}else if(r.type==='transfer'){if(r.from==='cash')c-=a;else b-=a;if(r.to==='cash')c+=a;else b+=a}});return{c,b}}
-function sum(arr,type){return arr.filter(r=>r.type===type).reduce((s,r)=>s+Number(r.amount),0)}
-function rowTable(arr){if(!arr.length)return '<div class="empty">No transactions found.</div>';return '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Category / Details</th><th>Account</th><th>Amount</th></tr></thead><tbody>'+arr.slice().reverse().map(r=>{let typ=r.type==='in'?'Cash In':r.type==='out'?'Withdraw':'Transfer';let acct=r.type==='transfer'?`${r.from} → ${r.to}`:r.account;return `<tr><td>${esc(r.date)}</td><td><span class="tag ${r.type==='in'?'in':r.type==='out'?'out':''}">${typ}</span></td><td><b>${esc(r.category||typ)}</b><br><span class="muted">${esc(r.note||'')}</span></td><td>${esc(acct||'')}</td><td><b>${money(r.amount)}</b></td></tr>`}).join('')+'</tbody></table></div>'}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function renderAll(){let bal=balances();$('cashBalance').textContent=money(bal.c);$('bankBalance').textContent=money(bal.b);let t=records.filter(r=>r.date===today());$('todayIn').textContent=money(sum(t,'in'));$('todayOut').textContent=money(sum(t,'out'));$('recentTable').innerHTML=rowTable(records.slice(-6));renderHistory();renderReport()}
-function addRecord(obj){obj.id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);records.push(obj);save();toast('Entry saved successfully');showPage('dashboard')}
-function formData(form){return Object.fromEntries(new FormData(form).entries())}
-['cashinForm','withdrawForm','entryForm'].forEach(id=>$(id).addEventListener('submit',e=>{e.preventDefault();let d=formData(e.target),amt=Number(d.amount);if(!amt||amt<=0)return toast('Enter a valid amount');let type=id==='cashinForm'?'in':id==='withdrawForm'?'out':d.type;addRecord({date:d.date,type,account:d.account,amount:amt,category:d.category,note:d.note||''}) ;e.target.reset();initDates()}));
-$('transferForm').addEventListener('submit',e=>{e.preventDefault();let d=formData(e.target),amt=Number(d.amount);if(!amt||amt<=0)return toast('Enter a valid amount');if(d.from===d.to)return toast('Choose two different accounts');let b=balances(),available=d.from==='cash'?b.c:b.b;if(amt>available)return toast('Insufficient balance in source account');addRecord({date:d.date,type:'transfer',from:d.from,to:d.to,amount:amt,category:'Account Transfer',note:d.note||''});e.target.reset();initDates()});
-function renderHistory(){let q=($('historySearch')?.value||'').toLowerCase(),type=$('historyType')?.value||'all',date=$('historyDate')?.value||'';let a=records.filter(r=>(type==='all'||r.type===type)&&(!date||r.date===date)&&(`${r.category} ${r.note}`.toLowerCase().includes(q)));$('historyTable').innerHTML=rowTable(a)}
-['historySearch','historyType','historyDate'].forEach(id=>$(id).addEventListener('input',renderHistory));
-function periodMatch(date,period,base){let d=new Date(date+'T12:00:00'),b=new Date(base+'T12:00:00');if(period==='day')return date===base;if(period==='month')return d.getFullYear()===b.getFullYear()&&d.getMonth()===b.getMonth();let start=new Date(b);start.setDate(b.getDate()-((b.getDay()+6)%7));let end=new Date(start);end.setDate(start.getDate()+7);return d>=start&&d<end}
-function renderReport(){if(!$('reportPeriod'))return;let p=$('reportPeriod').value,base=$('reportDate').value||today(),a=records.filter(r=>periodMatch(r.date,p,base)),inc=sum(a,'in'),out=sum(a,'out');$('rIn').textContent=money(inc);$('rOut').textContent=money(out);$('rNet').textContent=money(inc-out);$('rCount').textContent=a.length;$('reportTable').innerHTML=rowTable(a)}
-$('reportPeriod').addEventListener('change',renderReport);$('reportDate').addEventListener('change',renderReport);
-function download(name,content,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
-function backupData(){download('CSC_Business_Manager_Backup_'+today()+'.json',JSON.stringify({app:'CSC Business Manager',version:1,exportedAt:new Date().toISOString(),records},null,2),'application/json');toast('Backup downloaded')}
-function restoreData(){let f=$('restoreFile').files[0];if(!f)return toast('Select a backup file first');let rd=new FileReader();rd.onload=()=>{try{let obj=JSON.parse(rd.result),arr=Array.isArray(obj)?obj:obj.records;if(!Array.isArray(arr))throw Error();if(!confirm('This will replace current records. Continue?'))return;records=arr;save();toast('Backup restored')}catch(e){toast('Invalid backup file')}};rd.readAsText(f)}
-function exportCSV(reportOnly){let arr=records;if(reportOnly){let p=$('reportPeriod').value,b=$('reportDate').value||today();arr=records.filter(r=>periodMatch(r.date,p,b))}let cols=['Date','Type','Category','Account','From','To','Amount','Note'];let lines=[cols.join(','),...arr.map(r=>[r.date,r.type,r.category,r.account,r.from,r.to,r.amount,r.note].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(','))];download('CSC_Transactions_'+today()+'.csv','\ufeff'+lines.join('\n'),'text/csv;charset=utf-8')}
-$('pinForm').addEventListener('submit',e=>{e.preventDefault();let d=formData(e.target);if(d.old!==(localStorage.getItem(PINKEY)||'1234'))return toast('Current PIN is incorrect');if(!/^\d{4,8}$/.test(d.next))return toast('PIN must be 4 to 8 digits');localStorage.setItem(PINKEY,d.next);e.target.reset();toast('PIN updated')});
-function clearRecords(){if(confirm('Delete all transaction records from this browser? Download a backup first.')){records=[];save();toast('All records cleared')}}
-$('loginForm').addEventListener('submit',e=>{e.preventDefault();if($('loginPin').value===(localStorage.getItem(PINKEY)||'1234')){$('login').classList.add('hidden');$('loginPin').value=''}else $('loginError').textContent='Incorrect PIN. Try again.'});
-load();initDates();renderAll();
-</script>
-</body>
-</html>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const G=[["Aadhaar","🪪",["Aadhaar Update","Aadhaar Download / Print","Mobile Number Link","Biometric Update"]],
+["PAN","🧾",["New PAN Apply","PAN Correction","PAN Reprint","PAN-Aadhaar Link"]],
+["EPFO","🏢",["EPFO Claim","UAN Activation","EPFO KYC Update","EPF Passbook"]],
+["Banking","🏦",["Cash Withdrawal (AEPS)","Cash Deposit","Money Transfer","Balance Enquiry / Mini Statement"]],
+["Govt Schemes","🏛️",["Ayushman Card","PM Kisan","e-Shram Card","Income Certificate","Caste Certificate","Residence Certificate","Voter ID","Ration Card"]],
+["Bills & Recharge","💡",["Electricity Bill","Water Bill","Gas Bill","Mobile Recharge","DTH Recharge","FASTag","Insurance Premium"]],
+["Travel","🚆",["Rail Ticket","Bus Ticket","Flight Ticket"]],
+["Other","📄",["Online Form Filling","Exam / Job Application","Print / Photocopy","Lamination / Scan","Other Service"]]];
+const K='cscm_tx_v2';let tx=[],kind='svc';
+try{tx=JSON.parse(localStorage.getItem(K)||'[]');if(!Array.isArray(tx))tx=[]}catch(e){tx=[]}
+const sv=()=>{try{localStorage.setItem(K,JSON.stringify(tx))}catch(e){}};
+const ld=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const M=n=>'₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2400)}
+function nav(p){$$('.page').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('.nb').forEach(x=>x.classList.toggle('on',x.dataset.p===p));$('#drawer').classList.remove('open');$('#ov').classList.remove('on');if(p==='hist')hist();if(p==='rep')rep();scrollTo(0,0)}
+function bal(){let w=0,b=0;tx.forEach(r=>{const a=+r.amt;if(r.kind==='svc'||r.kind==='add'){r.acc==='bank'?b+=a:w+=a}else if(r.kind==='wd'){r.acc==='bank'?b-=a:w-=a}else{r.from==='bank'?b-=a:w-=a;r.to==='bank'?b+=a:w+=a}});return{w,b}}
+const earn=a=>a.filter(r=>r.kind==='svc').reduce((s,r)=>s+ +r.amt,0);
+const KI={svc:'🧩',add:'➕',wd:'💳',tr:'⇄'},KN={add:'Add Balance',wd:'Withdraw',tr:'Transfer'};
+function row(r,del){const pos=r.kind==='svc'||r.kind==='add',tt=r.kind==='svc'?r.svc:KN[r.kind];
+ const sub=[r.d+' '+(r.t||''),r.name,r.mob].filter(Boolean).join(' · ');
+ return `<div class="row"><div class="ic">${KI[r.kind]}</div><div class="t"><b>${esc(tt)}</b><small>${esc(sub)}</small></div><span class="amt ${r.kind==='tr'?'':pos?'pos':'neg'}">${r.kind==='tr'?'':pos?'+':'−'}${M(r.amt)}</span>${del?`<button class="x" data-del="${r.id}" aria-label="Delete">✕</button>`:''}</div>`}
+function dash(){const td=tx.filter(r=>r.d===ld()),b=bal();$('#d1').textContent=tx.length;$('#d2').textContent=M(earn(tx));$('#d3').textContent=td.length;$('#d4').textContent=M(earn(td));
+ $('#bw').textContent=M(b.w);$('#bb').textContent=M(b.b);$('#bc').textContent=M(earn(tx));
+ $('#recent').innerHTML=tx.length?tx.slice(-5).reverse().map(r=>row(r)).join(''):'<div class="empty">Abhi koi entry nahi. New Entry se shuru karein.</div>';
+ const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const k=ld(d);return{l:['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()],v:earn(tx.filter(r=>r.d===k))}});
+ const mx=Math.max(1,...days.map(x=>x.v));
+ $('#chart').innerHTML='<svg viewBox="0 0 300 130" width="100%">'+days.map((x,i)=>{const h=x.v/mx*85,xx=14+i*40;return `<rect x="${xx}" y="${100-h}" width="26" height="${h}" rx="6" fill="#2563eb"/><text x="${xx+13}" y="118" font-size="11" text-anchor="middle" fill="currentColor" opacity=".7">${x.l}</text>${x.v?`<text x="${xx+13}" y="${94-h}" font-size="9" text-anchor="middle" fill="currentColor">${Math.round(x.v)}</text>`:''}`}).join('')+'</svg>'}
+function hist(){const q=$('#hq').value.toLowerCase(),a=tx.filter(r=>[r.svc,r.name,r.mob,r.note,KN[r.kind]].join(' ').toLowerCase().includes(q));$('#hl').innerHTML=a.length?a.slice().reverse().map(r=>row(r,1)).join(''):'<div class="empty">Koi transaction nahi mila.</div>'}
+function rep(){const p=$('#rp').value,t=ld(),m=t.slice(0,7),w0=new Date();w0.setDate(w0.getDate()-6);const w=ld(w0);
+ const a=tx.filter(r=>r.kind==='svc'&&(p==='d'?r.d===t:p==='w'?r.d>=w:r.d.slice(0,7)===m));$('#r1').textContent=M(earn(a));$('#r2').textContent=a.length;
+ const g={};a.forEach(r=>{g[r.svc]=g[r.svc]||{n:0,s:0};g[r.svc].n++;g[r.svc].s+= +r.amt});
+ $('#rl').innerHTML=Object.keys(g).length?Object.entries(g).sort((x,y)=>y[1].s-x[1].s).map(([k,v])=>`<div class="row"><div class="t"><b>${esc(k)}</b><small>${v.n} entries</small></div><span class="amt pos">${M(v.s)}</span></div>`).join(''):'<div class="empty">Is period me koi service entry nahi.</div>'}
+function svcs(g){$('#chips').innerHTML='<button data-g="">All</button>'+G.map(x=>`<button data-g="${x[0]}">${x[1]} ${x[0]}</button>`).join('');
+ $('#svcList').innerHTML=G.filter(x=>!g||x[0]===g).map(x=>`<div class="card"><h3>${x[1]} ${x[0]}</h3>${x[2].map(s=>`<button class="svc" data-s="${esc(s)}">${esc(s)}<span style="color:var(--blue)">＋</span></button>`).join('')}</div>`).join('')}
+function setKind(k){kind=k;$$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('.f-svc').classList.toggle('hide',k!=='svc');$('.f-acc').classList.toggle('hide',k==='tr');$('.f-tr').classList.toggle('hide',k!=='tr');
+ $('#fal').textContent=k==='svc'?'Charge / Earning (₹)':'Amount (₹)'}
+function openEntry(k,s){nav('entry');setKind(k);$('#fd').value=ld();if(s)$('#fs').value=s}
+$('#fs').innerHTML=G.map(x=>`<optgroup label="${x[0]}">${x[2].map(s=>`<option>${esc(s)}</option>`).join('')}</optgroup>`).join('');
+$('#qacc').innerHTML=G.slice(0,6).map(x=>`<button class="tile" data-g2="${x[0]}"><i>${x[1]}</i>${x[0]}</button>`).join('');
+$('#save').onclick=()=>{const a=+$('#fa').value;if(!(a>0))return toast('Sahi amount daalein');
+ const r={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),d:$('#fd').value||ld(),t:new Date().toTimeString().slice(0,5),kind,amt:a,note:$('#fo').value.trim()};
+ if(kind==='svc'){r.svc=$('#fs').value;r.name=$('#fn').value.trim();r.mob=$('#fm').value.trim()}
+ if(kind==='tr'){r.from=$('#ff').value;r.to=$('#ft').value;if(r.from===r.to)return toast('Do alag account chunein')}else r.acc=$('#fc').value;
+ const b=bal();if(kind==='wd'&&a>(r.acc==='bank'?b.b:b.w))return toast('Balance kam hai');if(kind==='tr'&&a>(r.from==='bank'?b.b:b.w))return toast('Balance kam hai');
+ tx.push(r);sv();['#fa','#fn','#fm','#fo'].forEach(s=>$(s).value='');dash();toast('Entry save ho gayi');nav('dash')};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-p],[data-k],[data-g],[data-g2],[data-s],[data-del],[data-t]');if(!t)return;const d=t.dataset;
+ if(d.del){if(confirm('Ye entry delete karein?')){tx=tx.filter(r=>r.id!==d.del);sv();hist();dash()}}
+ else if(d.s!==undefined)openEntry('svc',d.s);
+ else if(d.g2!==undefined){nav('svcs');svcs(d.g2)}
+ else if(d.g!==undefined)svcs(d.g);
+ else if(d.t)setTheme(d.t);
+ else if(d.k&&t.closest('#seg'))setKind(d.k);
+ else if(d.k)openEntry(d.k);
+ else if(d.p){nav(d.p);if(d.p==='svcs')svcs('')}});
+$('#menu').onclick=()=>{$('#drawer').classList.add('open');$('#ov').classList.add('on')};$('#ov').onclick=()=>{$('#drawer').classList.remove('open');$('#ov').classList.remove('on')};
+$('#hq').oninput=hist;$('#rp').onchange=rep;
+function setTheme(t){const r=document.documentElement;t==='auto'?r.removeAttribute('data-theme'):r.dataset.theme=t;try{localStorage.setItem('cscm_th',t)}catch(e){}}
+try{const t=localStorage.getItem('cscm_th');if(t)setTheme(t)}catch(e){}
+$('#theme').onclick=()=>{const dk=document.documentElement.dataset.theme==='dark'||(!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);setTheme(dk?'light':'dark')};
+function dl(n,c,t){const u=URL.createObjectURL(new Blob([c],{type:t})),a=document.createElement('a');a.href=u;a.download=n;a.click();URL.revokeObjectURL(u)}
+$('#bk').onclick=()=>dl('CSC_Manage_Backup_'+ld()+'.json',JSON.stringify({app:'CSC Manage',v:2,tx},null,2),'application/json');
+$('#csv').onclick=()=>dl('CSC_Manage_'+ld()+'.csv','\ufeff'+['Date,Time,Type,Service,Name,Mobile,Account,Amount,Note'].concat(tx.map(r=>[r.d,r.t,r.kind,r.svc,r.name,r.mob,r.acc||(r.from+'>'+r.to),r.amt,r.note].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(','))).join('\n'),'text/csv');
+$('#rs').onclick=()=>{const f=$('#rf').files[0];if(!f)return toast('Pehle file chunein');const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result),a=Array.isArray(o)?o:o.tx;if(!Array.isArray(a))throw 0;if(!confirm('Current records replace ho jayenge. Continue?'))return;tx=a;sv();dash();toast('Backup restore ho gaya')}catch(e){toast('Galat backup file')}};rd.readAsText(f)};
+$('#clr').onclick=()=>{if(confirm('Saare records delete karein? Pehle backup le lein.')){tx=[];sv();dash();toast('Records clear')}};
+$('#fd').value=ld();svcs('');dash();
+</script></body></html>
