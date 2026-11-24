@@ -1,199 +1,57 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
 <title>CSC Manage</title>
 <style>
-:root{--bg:#eef2fb;--card:#fff;--ink:#15213b;--mut:#6b7794;--line:#e3e9f5;--nav:#0f1b3d;--blue:#2563eb;--grn:#16a34a;--red:#dc2626;--sh:0 6px 20px rgba(20,40,90,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1226;--card:#141f3a;--ink:#e8eefc;--mut:#93a0c0;--line:#243152;--nav:#070d1d;--sh:none}}
-:root[data-theme="dark"]{--bg:#0b1226;--card:#141f3a;--ink:#e8eefc;--mut:#93a0c0;--line:#243152;--nav:#070d1d;--sh:none}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box;margin:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);z-index:30}
-button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--nav);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px}
-header h1{font-size:18px;flex:1}header button{background:#ffffff1f;color:#fff;border-radius:10px;width:40px;height:40px;font-size:19px}
-#drawer{position:fixed;top:0;bottom:0;left:0;width:280px;max-width:82%;background:var(--nav);color:#fff;z-index:40;transform:translateX(-100%);transition:transform .25s;padding:calc(env(safe-area-inset-top,0px) + 16px) 12px 20px;overflow:auto}
-#drawer.open{transform:none}
-#ov{position:fixed;inset:0;background:#0008;z-index:35;display:none}#ov.on{display:block}
-.brand{text-align:center;padding:6px 0 14px}.brand b{display:block;font-size:21px;margin-top:6px}.brand small{color:#b6c3e0}
-.logo{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#ff9933,#fff 50%,#138808);color:#1a2a6c;font-weight:900;font-size:18px}
-.nb{display:flex;align-items:center;gap:12px;width:100%;background:none;color:#dbe4f7;padding:13px 12px;border-radius:12px;font-weight:600;text-align:left}
-.nb span{width:26px;text-align:center;font-size:19px}.nb.on{background:var(--blue);color:#fff}
-main{padding:14px 14px 40px;max-width:760px;margin:auto}
-.page{display:none}.page.on{display:block}
-h2{font-size:21px;margin:4px 0 12px}h3{font-size:16px;margin-bottom:10px}
-.banner{border-radius:18px;padding:18px;color:#fff;background:linear-gradient(120deg,#1d2f8f,#3b2fc9 55%,#1f6fe5);margin-bottom:12px}
-.banner b{font-size:26px;display:block}.banner b i{color:#ffd83a;font-style:normal}.banner span{font-size:13px;opacity:.9}
-.banner em{display:inline-block;background:#ffd83a;color:#1a1a1a;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;font-style:normal;margin-top:8px}
-.grid{display:grid;gap:10px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
-.stat{border-radius:16px;padding:14px;color:#fff;min-width:0}
-.stat small{display:block;font-size:12px;opacity:.92}.stat b{font-size:22px;display:block;overflow-wrap:anywhere}
-.s1{background:linear-gradient(135deg,#2563eb,#1d4ed8)}.s2{background:linear-gradient(135deg,#16a34a,#15803d)}.s3{background:linear-gradient(135deg,#9333ea,#7e22ce)}.s4{background:linear-gradient(135deg,#f97316,#ea580c)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px;box-shadow:var(--sh)}
-.tile{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center;font-size:12px;font-weight:700;color:var(--ink)}
-.tile i{display:block;font-style:normal;font-size:26px;margin-bottom:4px}
-.bal{border-radius:14px;padding:12px 6px;text-align:center;background:var(--bg);border:1px solid var(--line)}.bal b{display:block;font-size:16px}.bal small{color:var(--mut);font-size:12px}
-.qa{border-radius:14px;padding:13px 6px;color:#fff;font-weight:700;font-size:13px;text-align:center}.qa i{display:block;font-style:normal;font-size:20px}
-.row{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
-.ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--bg);flex:none}
-.row div.t{flex:1;min-width:0}.row b{display:block;font-size:14px}.row small{color:var(--mut);font-size:12px}
-.pos{color:var(--grn)}.neg{color:var(--red)}.amt{font-weight:800;white-space:nowrap}
-.x{background:none;color:var(--mut);font-size:17px;padding:4px 8px}
-label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px;color:var(--mut)}
-input,select{width:100%;min-height:50px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:16px}
-.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.seg button{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 2px;font-size:12px;font-weight:700}.seg button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn{width:100%;min-height:50px;border-radius:12px;background:var(--blue);color:#fff;font-weight:800;margin-top:16px}.btn.alt{background:var(--bg);color:var(--ink);border:1px solid var(--line)}.btn.dng{background:#fee2e2;color:var(--red)}
-.hide{display:none!important}
-.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px}.chips button{flex:none;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 14px;font-weight:700;font-size:13px}
-.svc{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;padding:13px 2px;border-bottom:1px solid var(--line);font-weight:600;text-align:left}
-.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:#15213b;color:#fff;padding:12px 18px;border-radius:12px;z-index:50;display:none;max-width:90%}
-.empty{text-align:center;color:var(--mut);padding:18px}
-.mut{color:var(--mut);font-size:13px}
-@media(min-width:900px){#drawer{transform:none}#ov{display:none!important}header{padding-left:296px}#menu{display:none}main{margin-left:296px;max-width:none;margin-right:auto}}
-@media print{header,#drawer,.btn{display:none!important}main{margin:0}}
-</style></head><body>
-<div id="ov"></div>
-<aside id="drawer">
- <div class="brand"><div class="logo">CSC</div><b>CSC Manage</b><small>Digital Seva, Sabke Liye</small></div>
- <button class="nb on" data-p="dash"><span>🏠</span>Dashboard</button>
- <button class="nb" data-p="svcs"><span>🧩</span>CSC Services</button>
- <button class="nb" data-p="entry"><span>➕</span>New Entry</button>
- <button class="nb" data-p="hist"><span>📒</span>Transactions</button>
- <button class="nb" data-p="rep"><span>📊</span>Reports</button>
- <button class="nb" data-p="bak"><span>☁️</span>Backup / Restore</button>
- <button class="nb" data-p="set"><span>⚙️</span>Settings</button>
- <button class="nb" data-p="about"><span>ℹ️</span>About</button>
-</aside>
-<header><button id="menu" aria-label="Menu">☰</button><h1>CSC Manage</h1><button id="theme" aria-label="Theme">🌓</button></header>
-<main>
-<section class="page on" id="p-dash">
- <div class="banner"><b>CSC <i>Manage</i></b><span>Digital Services Made Easy</span><br><em>Empowering VLEs, Enabling Digital India</em></div>
- <div class="grid g2">
-  <div class="stat s1"><small>Total Transactions</small><b id="d1">0</b></div>
-  <div class="stat s2"><small>Total Earnings</small><b id="d2">₹0</b></div>
-  <div class="stat s3"><small>Today’s Transactions</small><b id="d3">0</b></div>
-  <div class="stat s4"><small>Today’s Earnings</small><b id="d4">₹0</b></div>
- </div>
- <div class="card"><h3>Balance Summary</h3><div class="grid g3">
-  <div class="bal"><span>👛</span><b id="bw">₹0</b><small>Wallet</small></div>
-  <div class="bal"><span>🏦</span><b id="bb">₹0</b><small>Bank</small></div>
-  <div class="bal"><span>🎁</span><b id="bc">₹0</b><small>Commission</small></div></div></div>
- <div class="card"><h3>Quick Actions</h3><div class="grid g2">
-  <button class="qa" style="background:#16a34a" data-k="add"><i>➕</i>Add Balance</button>
-  <button class="qa" style="background:#0ea5e9" data-k="wd"><i>💳</i>Withdraw</button>
-  <button class="qa" style="background:#8b5cf6" data-k="tr"><i>⇄</i>Transfer</button>
-  <button class="qa" style="background:#f59e0b" data-p="rep"><i>📄</i>Generate Report</button></div></div>
- <div class="card"><h3>CSC Services Quick Access</h3><div class="grid g3" id="qacc"></div></div>
- <div class="card"><h3>Last 7 Days Earnings</h3><div id="chart"></div></div>
- <div class="card"><div style="display:flex;justify-content:space-between"><h3>Recent Transactions</h3><a data-p="hist" style="color:var(--blue);font-weight:700">View All →</a></div><div id="recent"></div></div>
-</section>
-
-<section class="page" id="p-svcs"><h2>CSC Services</h2><div class="chips" id="chips"></div><div id="svcList"></div></section>
-
-<section class="page" id="p-entry"><h2>New Entry</h2>
- <div class="card" style="margin-top:0">
-  <div class="seg" id="seg"><button data-k="svc" class="on">Service</button><button data-k="add">Add Balance</button><button data-k="wd">Withdraw</button><button data-k="tr">Transfer</button></div>
-  <label>Date</label><input type="date" id="fd">
-  <div class="f-svc"><label>Service</label><select id="fs"></select>
-   <label>Customer Name (optional)</label><input id="fn" maxlength="60" placeholder="Name">
-   <label>Mobile (optional)</label><input id="fm" inputmode="numeric" maxlength="10" placeholder="10 digit number"></div>
-  <label id="fal">Charge / Earning (₹)</label><input type="number" id="fa" min="0.01" step="0.01" inputmode="decimal" placeholder="Amount">
-  <div class="f-acc"><label>Account</label><select id="fc"><option value="wallet">Wallet / Cash</option><option value="bank">Bank</option></select></div>
-  <div class="f-tr hide"><label>From</label><select id="ff"><option value="wallet">Wallet / Cash</option><option value="bank">Bank</option></select>
-   <label>To</label><select id="ft"><option value="bank">Bank</option><option value="wallet">Wallet / Cash</option></select></div>
-  <label>Note (optional)</label><input id="fo" maxlength="120" placeholder="Short note">
-  <button class="btn" id="save">Save Entry</button></div>
-</section>
-
-<section class="page" id="p-hist"><h2>Transactions</h2>
- <input id="hq" placeholder="Search name, service, mobile" style="margin-bottom:10px">
- <div class="card" style="margin-top:0"><div id="hl"></div></div></section>
-
-<section class="page" id="p-rep"><h2>Reports</h2>
- <select id="rp"><option value="d">Today</option><option value="w">Last 7 Days</option><option value="m" selected>This Month</option></select>
- <div class="grid g2" style="margin-top:10px"><div class="stat s2"><small>Earnings</small><b id="r1">₹0</b></div><div class="stat s1"><small>Transactions</small><b id="r2">0</b></div></div>
- <div class="card"><h3>Service-wise Earnings</h3><div id="rl"></div></div>
- <button class="btn" onclick="window.print()">Print / Save PDF</button></section>
-
-<section class="page" id="p-bak"><h2>Backup / Restore</h2>
- <div class="card" style="margin-top:0"><p class="mut">Saara data sirf is browser me save hota hai. Regular backup download karte rahein.</p>
-  <button class="btn" id="bk">Download Backup (JSON)</button><button class="btn alt" id="csv">Download CSV</button>
-  <label>Restore from backup file</label><input type="file" id="rf" accept=".json,application/json"><button class="btn alt" id="rs">Restore Backup</button></div></section>
-
-<section class="page" id="p-set"><h2>Settings</h2>
- <div class="card" style="margin-top:0"><h3>Theme</h3><div class="seg" style="grid-template-columns:repeat(3,1fr)" id="th"><button data-t="light">☀️ Light</button><button data-t="dark">🌙 Dark</button><button data-t="auto">Auto</button></div>
-  <button class="btn dng" id="clr">Clear All Records</button></div></section>
-
-<section class="page" id="p-about"><h2>About</h2><div class="card" style="margin-top:0"><b>CSC Manage v2.0</b><p class="mut" style="margin-top:6px">Offline record-keeping tool for CSC centres. Ye koi official government app nahi hai.</p></div></section>
-</main>
-<div class="toast" id="toast"></div>
+:root{--bg:#f3f5f9;--panel:#fff;--ink:#172033;--muted:#687386;--line:#e5e9f0;--brand:#2457d6;--soft:#eaf0ff;--good:#13845b;--bad:#c33d4b;--shadow:0 5px 22px #14213b0d}
+[data-theme=dark]{--bg:#0d1421;--panel:#151f30;--ink:#edf2fc;--muted:#a7b2c5;--line:#29364a;--brand:#86a8ff;--soft:#233252;--good:#54d5a2;--bad:#ff8290;--shadow:none}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100dvh;display:flex}.sidebar{width:250px;background:var(--panel);border-right:1px solid var(--line);padding:20px 14px;position:fixed;inset:0 auto 0 0;z-index:5;transform:translateX(-100%);transition:.22s;overflow:auto}.sidebar.open{transform:translateX(0)}.shade{display:none;position:fixed;inset:0;background:#0007;z-index:4}.shade.show{display:block}.brand{font-size:20px;font-weight:800;padding:8px 10px 22px}.brand small{display:block;font-size:12px;color:var(--muted);font-weight:500}.nav button{display:flex;width:100%;border:0;background:transparent;color:var(--ink);padding:12px;border-radius:10px;text-align:left;margin:3px 0;gap:10px}.nav button.active,.nav button:hover{background:var(--soft);color:var(--brand)}.main{width:100%;min-width:0}.top{height:62px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 16px;position:sticky;top:0;z-index:3}.top button{border:0;background:var(--soft);color:var(--ink);border-radius:9px;padding:9px 12px}.top strong{font-size:17px}.top .spacer{flex:1}.content{max-width:1100px;margin:auto;padding:18px 16px 44px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.welcome h1{font-size:23px;margin:0 0 3px}.muted{color:var(--muted)}.small{font-size:12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}.metric .muted{font-size:13px}.metric b{display:block;font-size:23px;margin-top:8px;overflow-wrap:anywhere}.metric .tag{font-size:12px;color:var(--muted)}.section{margin-top:20px}.section h2{font-size:17px;margin:0 0 12px}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.action{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:12px;padding:14px 10px;text-align:left}.action span{display:block;font-weight:650;margin-top:7px}.action em{font-style:normal;font-size:21px}.panel{box-shadow:none}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.btn{border:0;background:var(--brand);color:white;padding:10px 14px;border-radius:9px;font-weight:650}.btn.secondary{background:var(--soft);color:var(--ink)}.btn.danger{background:#ffe9ec;color:#a92c3b}.field{display:flex;flex-direction:column;gap:5px;margin:9px 0}.field label{font-size:13px;color:var(--muted)}input,select,textarea{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:11px;min-width:0}textarea{min-height:78px;resize:vertical}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:560px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:600}.positive{color:var(--good)}.negative{color:var(--bad)}.hidden{display:none!important}.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.service{border:1px solid var(--line);border-radius:12px;padding:13px;background:var(--panel);color:var(--ink);text-decoration:none;display:block}.service b{display:block;margin-bottom:4px}.service small{color:var(--brand);overflow-wrap:anywhere}.pill{display:inline-block;padding:4px 8px;border-radius:30px;background:var(--soft);font-size:12px}.empty{padding:22px;text-align:center;color:var(--muted)}.footer{margin-top:26px;color:var(--muted);font-size:12px;text-align:center}
+@media(min-width:850px){.sidebar{transform:none}.main{margin-left:250px}.top .menu{display:none}.shade{display:none!important}}
+@media(max-width:650px){.content{padding:15px 12px 36px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card,.panel{padding:13px}.metric b{font-size:20px}.actions{grid-template-columns:repeat(2,1fr)}.welcome h1{font-size:21px}.service-grid{grid-template-columns:1fr}.top{padding:0 12px}.welcome{align-items:flex-start}}
+</style></head>
+<body><div class="app">
+<aside class="sidebar" id="sidebar"><div class="brand">CSC Manage<small>Offline business dashboard</small></div><nav class="nav" id="nav">
+<button data-page="dashboard" class="active">⌂ &nbsp; Dashboard</button><button data-page="transactions">⇄ &nbsp; Transactions</button><button data-page="diary">▤ &nbsp; Daily Diary</button><button data-page="services">▦ &nbsp; CSC Services</button><button data-page="reports">▥ &nbsp; Reports</button><button data-page="backup">☁ &nbsp; Backup & Restore</button><button data-page="settings">⚙ &nbsp; Settings</button></nav></aside>
+<div class="shade" id="shade"></div><main class="main"><header class="top"><button class="menu" id="menu">☰</button><strong id="pageTitle">Dashboard</strong><span class="spacer"></span><button id="themeBtn">☾ Theme</button></header><div class="content" id="view"></div></main></div>
 <script>
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const G=[["Aadhaar","🪪",["Aadhaar Update","Aadhaar Download / Print","Mobile Number Link","Biometric Update"]],
-["PAN","🧾",["New PAN Apply","PAN Correction","PAN Reprint","PAN-Aadhaar Link"]],
-["EPFO","🏢",["EPFO Claim","UAN Activation","EPFO KYC Update","EPF Passbook"]],
-["Banking","🏦",["Cash Withdrawal (AEPS)","Cash Deposit","Money Transfer","Balance Enquiry / Mini Statement"]],
-["Govt Schemes","🏛️",["Ayushman Card","PM Kisan","e-Shram Card","Income Certificate","Caste Certificate","Residence Certificate","Voter ID","Ration Card"]],
-["Bills & Recharge","💡",["Electricity Bill","Water Bill","Gas Bill","Mobile Recharge","DTH Recharge","FASTag","Insurance Premium"]],
-["Travel","🚆",["Rail Ticket","Bus Ticket","Flight Ticket"]],
-["Other","📄",["Online Form Filling","Exam / Job Application","Print / Photocopy","Lamination / Scan","Other Service"]]];
-const K='cscm_tx_v2';let tx=[],kind='svc';
-try{tx=JSON.parse(localStorage.getItem(K)||'[]');if(!Array.isArray(tx))tx=[]}catch(e){tx=[]}
-const sv=()=>{try{localStorage.setItem(K,JSON.stringify(tx))}catch(e){}};
-const ld=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const M=n=>'₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2});
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2400)}
-function nav(p){$$('.page').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('.nb').forEach(x=>x.classList.toggle('on',x.dataset.p===p));$('#drawer').classList.remove('open');$('#ov').classList.remove('on');if(p==='hist')hist();if(p==='rep')rep();scrollTo(0,0)}
-function bal(){let w=0,b=0;tx.forEach(r=>{const a=+r.amt;if(r.kind==='svc'||r.kind==='add'){r.acc==='bank'?b+=a:w+=a}else if(r.kind==='wd'){r.acc==='bank'?b-=a:w-=a}else{r.from==='bank'?b-=a:w-=a;r.to==='bank'?b+=a:w+=a}});return{w,b}}
-const earn=a=>a.filter(r=>r.kind==='svc').reduce((s,r)=>s+ +r.amt,0);
-const KI={svc:'🧩',add:'➕',wd:'💳',tr:'⇄'},KN={add:'Add Balance',wd:'Withdraw',tr:'Transfer'};
-function row(r,del){const pos=r.kind==='svc'||r.kind==='add',tt=r.kind==='svc'?r.svc:KN[r.kind];
- const sub=[r.d+' '+(r.t||''),r.name,r.mob].filter(Boolean).join(' · ');
- return `<div class="row"><div class="ic">${KI[r.kind]}</div><div class="t"><b>${esc(tt)}</b><small>${esc(sub)}</small></div><span class="amt ${r.kind==='tr'?'':pos?'pos':'neg'}">${r.kind==='tr'?'':pos?'+':'−'}${M(r.amt)}</span>${del?`<button class="x" data-del="${r.id}" aria-label="Delete">✕</button>`:''}</div>`}
-function dash(){const td=tx.filter(r=>r.d===ld()),b=bal();$('#d1').textContent=tx.length;$('#d2').textContent=M(earn(tx));$('#d3').textContent=td.length;$('#d4').textContent=M(earn(td));
- $('#bw').textContent=M(b.w);$('#bb').textContent=M(b.b);$('#bc').textContent=M(earn(tx));
- $('#recent').innerHTML=tx.length?tx.slice(-5).reverse().map(r=>row(r)).join(''):'<div class="empty">Abhi koi entry nahi. New Entry se shuru karein.</div>';
- const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const k=ld(d);return{l:['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()],v:earn(tx.filter(r=>r.d===k))}});
- const mx=Math.max(1,...days.map(x=>x.v));
- $('#chart').innerHTML='<svg viewBox="0 0 300 130" width="100%">'+days.map((x,i)=>{const h=x.v/mx*85,xx=14+i*40;return `<rect x="${xx}" y="${100-h}" width="26" height="${h}" rx="6" fill="#2563eb"/><text x="${xx+13}" y="118" font-size="11" text-anchor="middle" fill="currentColor" opacity=".7">${x.l}</text>${x.v?`<text x="${xx+13}" y="${94-h}" font-size="9" text-anchor="middle" fill="currentColor">${Math.round(x.v)}</text>`:''}`}).join('')+'</svg>'}
-function hist(){const q=$('#hq').value.toLowerCase(),a=tx.filter(r=>[r.svc,r.name,r.mob,r.note,KN[r.kind]].join(' ').toLowerCase().includes(q));$('#hl').innerHTML=a.length?a.slice().reverse().map(r=>row(r,1)).join(''):'<div class="empty">Koi transaction nahi mila.</div>'}
-function rep(){const p=$('#rp').value,t=ld(),m=t.slice(0,7),w0=new Date();w0.setDate(w0.getDate()-6);const w=ld(w0);
- const a=tx.filter(r=>r.kind==='svc'&&(p==='d'?r.d===t:p==='w'?r.d>=w:r.d.slice(0,7)===m));$('#r1').textContent=M(earn(a));$('#r2').textContent=a.length;
- const g={};a.forEach(r=>{g[r.svc]=g[r.svc]||{n:0,s:0};g[r.svc].n++;g[r.svc].s+= +r.amt});
- $('#rl').innerHTML=Object.keys(g).length?Object.entries(g).sort((x,y)=>y[1].s-x[1].s).map(([k,v])=>`<div class="row"><div class="t"><b>${esc(k)}</b><small>${v.n} entries</small></div><span class="amt pos">${M(v.s)}</span></div>`).join(''):'<div class="empty">Is period me koi service entry nahi.</div>'}
-function svcs(g){$('#chips').innerHTML='<button data-g="">All</button>'+G.map(x=>`<button data-g="${x[0]}">${x[1]} ${x[0]}</button>`).join('');
- $('#svcList').innerHTML=G.filter(x=>!g||x[0]===g).map(x=>`<div class="card"><h3>${x[1]} ${x[0]}</h3>${x[2].map(s=>`<button class="svc" data-s="${esc(s)}">${esc(s)}<span style="color:var(--blue)">＋</span></button>`).join('')}</div>`).join('')}
-function setKind(k){kind=k;$$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('.f-svc').classList.toggle('hide',k!=='svc');$('.f-acc').classList.toggle('hide',k==='tr');$('.f-tr').classList.toggle('hide',k!=='tr');
- $('#fal').textContent=k==='svc'?'Charge / Earning (₹)':'Amount (₹)'}
-function openEntry(k,s){nav('entry');setKind(k);$('#fd').value=ld();if(s)$('#fs').value=s}
-$('#fs').innerHTML=G.map(x=>`<optgroup label="${x[0]}">${x[2].map(s=>`<option>${esc(s)}</option>`).join('')}</optgroup>`).join('');
-$('#qacc').innerHTML=G.slice(0,6).map(x=>`<button class="tile" data-g2="${x[0]}"><i>${x[1]}</i>${x[0]}</button>`).join('');
-$('#save').onclick=()=>{const a=+$('#fa').value;if(!(a>0))return toast('Sahi amount daalein');
- const r={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),d:$('#fd').value||ld(),t:new Date().toTimeString().slice(0,5),kind,amt:a,note:$('#fo').value.trim()};
- if(kind==='svc'){r.svc=$('#fs').value;r.name=$('#fn').value.trim();r.mob=$('#fm').value.trim()}
- if(kind==='tr'){r.from=$('#ff').value;r.to=$('#ft').value;if(r.from===r.to)return toast('Do alag account chunein')}else r.acc=$('#fc').value;
- const b=bal();if(kind==='wd'&&a>(r.acc==='bank'?b.b:b.w))return toast('Balance kam hai');if(kind==='tr'&&a>(r.from==='bank'?b.b:b.w))return toast('Balance kam hai');
- tx.push(r);sv();['#fa','#fn','#fm','#fo'].forEach(s=>$(s).value='');dash();toast('Entry save ho gayi');nav('dash')};
-document.addEventListener('click',e=>{const t=e.target.closest('[data-p],[data-k],[data-g],[data-g2],[data-s],[data-del],[data-t]');if(!t)return;const d=t.dataset;
- if(d.del){if(confirm('Ye entry delete karein?')){tx=tx.filter(r=>r.id!==d.del);sv();hist();dash()}}
- else if(d.s!==undefined)openEntry('svc',d.s);
- else if(d.g2!==undefined){nav('svcs');svcs(d.g2)}
- else if(d.g!==undefined)svcs(d.g);
- else if(d.t)setTheme(d.t);
- else if(d.k&&t.closest('#seg'))setKind(d.k);
- else if(d.k)openEntry(d.k);
- else if(d.p){nav(d.p);if(d.p==='svcs')svcs('')}});
-$('#menu').onclick=()=>{$('#drawer').classList.add('open');$('#ov').classList.add('on')};$('#ov').onclick=()=>{$('#drawer').classList.remove('open');$('#ov').classList.remove('on')};
-$('#hq').oninput=hist;$('#rp').onchange=rep;
-function setTheme(t){const r=document.documentElement;t==='auto'?r.removeAttribute('data-theme'):r.dataset.theme=t;try{localStorage.setItem('cscm_th',t)}catch(e){}}
-try{const t=localStorage.getItem('cscm_th');if(t)setTheme(t)}catch(e){}
-$('#theme').onclick=()=>{const dk=document.documentElement.dataset.theme==='dark'||(!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);setTheme(dk?'light':'dark')};
-function dl(n,c,t){const u=URL.createObjectURL(new Blob([c],{type:t})),a=document.createElement('a');a.href=u;a.download=n;a.click();URL.revokeObjectURL(u)}
-$('#bk').onclick=()=>dl('CSC_Manage_Backup_'+ld()+'.json',JSON.stringify({app:'CSC Manage',v:2,tx},null,2),'application/json');
-$('#csv').onclick=()=>dl('CSC_Manage_'+ld()+'.csv','\ufeff'+['Date,Time,Type,Service,Name,Mobile,Account,Amount,Note'].concat(tx.map(r=>[r.d,r.t,r.kind,r.svc,r.name,r.mob,r.acc||(r.from+'>'+r.to),r.amt,r.note].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(','))).join('\n'),'text/csv');
-$('#rs').onclick=()=>{const f=$('#rf').files[0];if(!f)return toast('Pehle file chunein');const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result),a=Array.isArray(o)?o:o.tx;if(!Array.isArray(a))throw 0;if(!confirm('Current records replace ho jayenge. Continue?'))return;tx=a;sv();dash();toast('Backup restore ho gaya')}catch(e){toast('Galat backup file')}};rd.readAsText(f)};
-$('#clr').onclick=()=>{if(confirm('Saare records delete karein? Pehle backup le lein.')){tx=[];sv();dash();toast('Records clear')}};
-$('#fd').value=ld();svcs('');dash();
+const KEY='cscManageData_v1';
+const defaults={openingCash:0,openingBank:0,transactions:[],diary:[],services:[
+['Aadhaar / UIDAI','https://uidai.gov.in/'],['PAN Card / Income Tax','https://www.incometax.gov.in/'],['EPFO','https://www.epfindia.gov.in/'],['DigiLocker','https://www.digilocker.gov.in/'],['Passport Seva','https://www.passportindia.gov.in/'],['Scholarships','https://scholarships.gov.in/'],['Government Services','https://www.india.gov.in/']]};
+let data;try{data={...defaults,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){data={...defaults}}
+let page='dashboard';
+const money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2});
+const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
+const el=id=>document.getElementById(id);
+function totals(){let cash=+data.openingCash||0,bank=+data.openingBank||0;data.transactions.forEach(t=>{let v=+t.amount||0;if(t.type==='Cash In'){if(t.mode==='Cash')cash+=v;else bank+=v}else if(t.type==='Withdraw'){if(t.mode==='Cash')cash-=v;else bank-=v}else if(t.type==='Expense'){if(t.mode==='Cash')cash-=v;else bank-=v}else if(t.type==='Transfer'){if(t.from==='Cash'){cash-=v;bank+=v}else{bank-=v;cash+=v}}});return{cash,bank,total:cash+bank}}
+function go(p){page=p;el('sidebar').classList.remove('open');el('shade').classList.remove('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));el('pageTitle').textContent=({dashboard:'Dashboard',transactions:'Transactions',diary:'Daily Diary',services:'CSC Services',reports:'Reports',backup:'Backup & Restore',settings:'Settings'})[p];render()}
+function render(){let v=el('view');if(page==='dashboard'){let t=totals(),today=new Date().toISOString().slice(0,10),day=data.transactions.filter(x=>x.date===today),inc=day.filter(x=>x.type==='Cash In').reduce((a,x)=>a+ +x.amount,0),out=day.filter(x=>['Withdraw','Expense'].includes(x.type)).reduce((a,x)=>a+ +x.amount,0);
+v.innerHTML=`<div class="welcome"><div><h1>Good day 👋</h1><div class="muted">Your CSC business at a glance</div></div><span class="pill">${new Date().toLocaleDateString('en-IN')}</span></div><div class="grid"><div class="card metric"><div class="muted">Cash Balance</div><b>${money(t.cash)}</b><div class="tag">Available cash</div></div><div class="card metric"><div class="muted">Bank Balance</div><b>${money(t.bank)}</b><div class="tag">Available bank</div></div><div class="card metric"><div class="muted">Today's In</div><b class="positive">${money(inc)}</b><div class="tag">Cash received</div></div><div class="card metric"><div class="muted">Today's Out</div><b class="negative">${money(out)}</b><div class="tag">Withdrawals & expenses</div></div></div><section class="section"><h2>Quick Actions</h2><div class="actions"><button class="action" onclick="newTxn('Cash In')"><em>＋</em><span>Cash In</span></button><button class="action" onclick="newTxn('Withdraw')"><em>↘</em><span>Withdraw</span></button><button class="action" onclick="newTxn('Transfer')"><em>⇄</em><span>Transfer</span></button><button class="action" onclick="newTxn('Expense')"><em>−</em><span>Expense</span></button></div></section><section class="section"><h2>Recent Transactions</h2>${txnTable(data.transactions.slice().reverse().slice(0,6))}</section><section class="section"><h2>Pending / Daily Work</h2><div class="panel">${data.diary.filter(x=>!x.done).slice(0,4).map(x=>`<div>• ${esc(x.task)} <span class="muted small">(${esc(x.date)})</span></div>`).join('')||'<div class="muted">No pending work.</div>'}<button class="btn secondary" style="margin-top:12px" onclick="go('diary')">Open Daily Diary</button></div></section>`}
+if(page==='transactions'){v.innerHTML=`<div class="welcome"><div><h1>Transactions</h1><div class="muted">Record money received, withdrawn, transferred or spent.</div></div><button class="btn" onclick="newTxn()">＋ Add</button></div><div class="panel"><div class="row"><div class="field"><label>Search</label><input id="txnSearch" placeholder="Search note or type" oninput="filterTxn()"></div><div class="field"><label>Type</label><select id="txnFilter" onchange="filterTxn()"><option value="">All types</option><option>Cash In</option><option>Withdraw</option><option>Transfer</option><option>Expense</option></select></div></div><div id="txnList">${txnTable(data.transactions.slice().reverse())}</div></div>`}
+if(page==='diary'){v.innerHTML=`<div class="welcome"><div><h1>Daily Diary</h1><div class="muted">Keep track of pending work and reminders.</div></div></div><div class="panel"><div class="field"><label>Work / Reminder</label><input id="diaryTask" placeholder="e.g. Customer document follow-up"></div><div class="row"><div class="field"><label>Date</label><input type="date" id="diaryDate" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Note (optional)</label><input id="diaryNote" placeholder="Short note"></div></div><button class="btn" onclick="addDiary()">Add to Diary</button></div><section class="section"><h2>Work List</h2><div class="panel">${data.diary.slice().reverse().map((x,i)=>`<div class="row" style="border-bottom:1px solid var(--line);padding:10px 0"><div><b style="${x.done?'text-decoration:line-through;color:var(--muted)':''}">${esc(x.task)}</b><div class="small muted">${esc(x.date)} · ${esc(x.note||'')}</div></div><button class="btn secondary" onclick="toggleDiary(${data.diary.length-1-i})">${x.done?'Undo':'Done'}</button><button class="btn danger" onclick="deleteDiary(${data.diary.length-1-i})">Delete</button></div>`).join('')||'<div class="empty">No diary items yet.</div>'}</div></section>`}
+if(page==='services'){v.innerHTML=`<div class="welcome"><div><h1>CSC Services</h1><div class="muted">Official portal shortcuts. Tap a box to open the website.</div></div></div><div class="service-grid">${data.services.map((s,i)=>`<a class="service" href="${safeUrl(s[1])}" target="_blank" rel="noopener"><b>${esc(s[0])}</b><small>${esc(s[1])}</small></a>`).join('')}</div><section class="section panel"><h2>Add Custom Website</h2><div class="field"><label>Service name</label><input id="serviceName" placeholder="e.g. State service portal"></div><div class="field"><label>Website URL (https://)</label><input id="serviceUrl" placeholder="https://example.gov.in"></div><button class="btn" onclick="addService()">Add Website</button></section>`}
+if(page==='reports'){v.innerHTML=`<div class="welcome"><div><h1>Reports</h1><div class="muted">Choose a date range to review and export records.</div></div></div><div class="panel"><div class="row"><div class="field"><label>From</label><input type="date" id="fromDate"></div><div class="field"><label>To</label><input type="date" id="toDate"></div></div><div class="row"><button class="btn" onclick="makeReport()">View Report</button><button class="btn secondary" onclick="printReport()">Print / Save PDF</button><button class="btn secondary" onclick="exportCSV()">Export CSV</button></div><div id="reportResult" class="section muted">Select dates and tap View Report.</div></div>`}
+if(page==='backup'){v.innerHTML=`<div class="welcome"><div><h1>Backup & Restore</h1><div class="muted">Keep a copy of your records somewhere safe.</div></div></div><div class="panel"><h2>Download Backup</h2><p class="muted">Save all transactions, diary items, services and opening balances as a JSON file.</p><button class="btn" onclick="backup()">Download Backup</button></div><section class="section panel"><h2>Restore Backup</h2><p class="muted">Choose a backup JSON file. Restoring replaces the current app data.</p><input type="file" id="restoreFile" accept=".json,application/json"><button class="btn" style="margin-top:12px" onclick="restore()">Restore Data</button></section>`}
+if(page==='settings'){v.innerHTML=`<div class="welcome"><div><h1>Settings</h1><div class="muted">Opening balances and appearance.</div></div></div><div class="panel"><h2>Opening Balance</h2><div class="row"><div class="field"><label>Opening Cash (₹)</label><input id="openingCash" type="number" min="0" step=".01" value="${+data.openingCash||0}"></div><div class="field"><label>Opening Bank (₹)</label><input id="openingBank" type="number" min="0" step=".01" value="${+data.openingBank||0}"></div></div><button class="btn" onclick="saveSettings()">Save Balances</button></div><section class="section panel"><h2>Appearance</h2><p class="muted">Switch between light and dark mode.</p><button class="btn secondary" onclick="toggleTheme()">Toggle Theme</button></section><section class="section panel"><h2>Data & Privacy</h2><p class="muted">Data is stored in this browser on this device. It is not encrypted or synced online. Clearing browser site data may erase records. Do not enter Aadhaar numbers, OTPs, passwords, bank PINs or other sensitive customer information.</p><button class="btn danger" onclick="clearAll()">Delete All App Data</button></section>`}}
+function txnTable(items){if(!items.length)return '<div class="empty">No transactions yet.</div>';return `<div class="tablewrap"><table><thead><tr><th>Date</th><th>Type</th><th>Details</th><th>Account</th><th>Amount</th><th></th></tr></thead><tbody>${items.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.type)}</td><td>${esc(x.note||'—')}</td><td>${esc(x.type==='Transfer'?x.from+' → '+(x.from==='Cash'?'Bank':'Cash'):x.mode)}</td><td class="${x.type==='Cash In'?'positive':(['Withdraw','Expense'].includes(x.type)?'negative':'')}">${money(x.amount)}</td><td><button class="btn danger" onclick="deleteTxn('${x.id}')">×</button></td></tr>`).join('')}</tbody></table></div>`}
+function newTxn(type='Cash In'){page='transactions';render();let t=type;let box=document.createElement('div');box.style.cssText='position:fixed;inset:0;background:#0008;z-index:10;display:grid;place-items:center;padding:14px';box.innerHTML=`<div class="panel" style="width:min(460px,100%);max-height:90dvh;overflow:auto"><div class="row"><h2 style="margin:0">Add Transaction</h2><button class="btn secondary" onclick="this.closest('[style*=fixed]').remove()">Close</button></div><div class="field"><label>Type</label><select id="mType"><option ${t==='Cash In'?'selected':''}>Cash In</option><option ${t==='Withdraw'?'selected':''}>Withdraw</option><option ${t==='Transfer'?'selected':''}>Transfer</option><option ${t==='Expense'?'selected':''}>Expense</option></select></div><div class="field"><label>Amount (₹)</label><input id="mAmount" type="number" min=".01" step=".01" placeholder="0.00"></div><div class="field" id="modeField"><label>Account</label><select id="mMode"><option>Cash</option><option>Bank</option></select></div><div class="field hidden" id="fromField"><label>Transfer from</label><select id="mFrom"><option>Cash</option><option>Bank</option></select></div><div class="field"><label>Date</label><input id="mDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Note</label><input id="mNote" placeholder="Optional details"></div><button class="btn" id="saveTxn">Save Transaction</button></div>`;document.body.append(box);let typeSel=box.querySelector('#mType');function update(){let tr=typeSel.value==='Transfer';box.querySelector('#modeField').classList.toggle('hidden',tr);box.querySelector('#fromField').classList.toggle('hidden',!tr)}typeSel.onchange=update;update();box.querySelector('#saveTxn').onclick=()=>{let amount=+box.querySelector('#mAmount').value;if(!(amount>0)){alert('Please enter a valid amount.');return}let typ=typeSel.value,from=box.querySelector('#mFrom').value;if(typ==='Transfer'){let bal=totals();if((from==='Cash'?bal.cash:bal.bank)<amount){if(!confirm('Source balance is lower than transfer amount. Save anyway?'))return}}else{let mode=box.querySelector('#mMode').value,bal=totals(),available=mode==='Cash'?bal.cash:bal.bank;if(['Withdraw','Expense'].includes(typ)&&available<amount){if(!confirm('Available balance is lower than amount. Save anyway?'))return}}data.transactions.push({id:Date.now().toString(),type:typ,amount,mode:box.querySelector('#mMode').value,from,date:box.querySelector('#mDate').value,note:box.querySelector('#mNote').value});save();box.remove();render()}}
+function filterTxn(){let q=(el('txnSearch')?.value||'').toLowerCase(),f=el('txnFilter')?.value||'';let a=data.transactions.slice().reverse().filter(x=>(!f||x.type===f)&&(`${x.note} ${x.type} ${x.date}`).toLowerCase().includes(q));el('txnList').innerHTML=txnTable(a)}
+function deleteTxn(id){if(confirm('Delete this transaction?')){data.transactions=data.transactions.filter(x=>x.id!==id);save();render()}}
+function addDiary(){let task=el('diaryTask').value.trim();if(!task)return alert('Enter work details.');data.diary.push({task,date:el('diaryDate').value,note:el('diaryNote').value,done:false});save();render()}
+function toggleDiary(i){data.diary[i].done=!data.diary[i].done;save();render()}function deleteDiary(i){data.diary.splice(i,1);save();render()}
+function safeUrl(u){try{let x=new URL(u);return ['https:','http:'].includes(x.protocol)?x.href:'#'}catch(e){return '#'}}
+function addService(){let n=el('serviceName').value.trim(),u=safeUrl(el('serviceUrl').value.trim());if(!n||u==='#')return alert('Enter a name and valid http/https website URL.');data.services.push([n,u]);save();render()}
+function saveSettings(){data.openingCash=+el('openingCash').value||0;data.openingBank=+el('openingBank').value||0;save();alert('Opening balances saved.');render()}
+function makeReport(){let f=el('fromDate').value,t=el('toDate').value;if(!f||!t||f>t)return alert('Select a valid date range.');let a=data.transactions.filter(x=>x.date>=f&&x.date<=t),sum=type=>a.filter(x=>x.type===type).reduce((s,x)=>s+ +x.amount,0);el('reportResult').innerHTML=`<h2>Report: ${esc(f)} to ${esc(t)}</h2><p>Transactions: <b>${a.length}</b></p><p>Cash In: <b class="positive">${money(sum('Cash In'))}</b></p><p>Withdrawals: <b>${money(sum('Withdraw'))}</b></p><p>Expenses: <b class="negative">${money(sum('Expense'))}</b></p><p>Transfers: <b>${money(sum('Transfer'))}</b></p>${txnTable(a)}`}
+function printReport(){if(!el('fromDate').value||!el('toDate').value){alert('Select dates first.');return}makeReport();let content=el('reportResult').innerHTML,w=window.open('','_blank');if(!w){alert('Allow pop-ups to print this report.');return}w.document.write(`<html><head><title>CSC Manage Report</title><style>body{font:14px Arial;padding:24px}table{width:100%;border-collapse:collapse}td,th{border:1px solid #ddd;padding:8px;text-align:left}</style></head><body><h1>CSC Manage Report</h1>${content}</body></html>`);w.document.close();w.print()}
+function exportCSV(){let f=el('fromDate').value,t=el('toDate').value;if(!f||!t||f>t)return alert('Select a valid date range.');let a=data.transactions.filter(x=>x.date>=f&&x.date<=t),rows=[['Date','Type','Amount','Account','Note'],...a.map(x=>[x.date,x.type,x.amount,x.type==='Transfer'?x.from+' transfer':x.mode,x.note||''])];let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\r\n');download(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),`CSC-Manage-${f}-to-${t}.csv`)}
+function backup(){download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),`CSC-Manage-Backup-${new Date().toISOString().slice(0,10)}.json`)}
+function restore(){let file=el('restoreFile').files[0];if(!file)return alert('Choose a JSON backup file.');let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.transactions)||!Array.isArray(x.diary)||!Array.isArray(x.services))throw 0;if(confirm('Replace current data with this backup?')){data={...defaults,...x};save();go('dashboard');alert('Backup restored.')}}catch(e){alert('This backup file is not valid.')}};r.readAsText(file)}
+function download(blob,name){let a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function clearAll(){if(confirm('Delete all CSC Manage data from this browser? This cannot be undone.')){localStorage.removeItem(KEY);data={...defaults};save();go('dashboard')}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toggleTheme(){let dark=document.documentElement.dataset.theme!=='dark';document.documentElement.dataset.theme=dark?'dark':'light';localStorage.setItem('cscTheme',dark?'dark':'light')}
+el('themeBtn').onclick=toggleTheme;el('menu').onclick=()=>{el('sidebar').classList.add('open');el('shade').classList.add('show')};el('shade').onclick=()=>{el('sidebar').classList.remove('open');el('shade').classList.remove('show')};el('nav').onclick=e=>{let b=e.target.closest('button[data-page]');if(b)go(b.dataset.page)};document.documentElement.dataset.theme=localStorage.getItem('cscTheme')||'light';render();
 </script></body></html>
