@@ -66,4 +66,4 @@ function restore(){let f=$('restoreFile').files[0];if(!f)return alert('Choose a 
 function clearData(){if(confirm('Delete all app data? This cannot be undone.')){localStorage.removeItem(KEY);data={...D};save();go('dashboard')}}
 function setTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('cscTheme',t)}function toggleTheme(){setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark')}
 $('hamb').onclick=()=>{$('sidebar').classList.add('open');$('shade').classList.add('show')};$('shade').onclick=()=>{$('sidebar').classList.remove('open');$('shade').classList.remove('show')};$('nav').onclick=e=>{let b=e.target.closest('button[data-page]');if(b)go(b.dataset.page)};setTheme(localStorage.getItem('cscTheme')||'light');render();
-</script></body></html>
+</script><link rel="manifest" href="./manifest.webmanifest"></body></html>
